@@ -1,0 +1,4 @@
+{
+  "mongoURI": "mongodb+srv://kamil:kamil1234@my-app-rir5x.mongodb.net/test?retryWrites=true",
+  "jwtSecret": "secret"
+}
