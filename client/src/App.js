@@ -1,11 +1,12 @@
 import React from "react";
-import InputField from "./components/UI/InputField/InputField";
+import Layout from "./containers/Layout/Layout";
+import Auth from "./containers/Auth/Auth";
 
 function App() {
   return (
-    <div className="App">
-      <InputField label="Login" placeholder="Login" />
-    </div>
+    <Layout>
+      <Auth />
+    </Layout>
   );
 }
 
