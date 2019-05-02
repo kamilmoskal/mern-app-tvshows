@@ -1,40 +1,74 @@
-import React from "react";
-import {
-  Button,
-  Checkbox,
-  Message,
-  Form,
-  Input,
-  Card
-} from "semantic-ui-react";
-import InputField from "../../../components/UI/InputField/InputField";
-import styled from "styled-components";
+import React, { useState } from "react";
+import { Button, Message, Form, Divider, Icon, Ref } from "semantic-ui-react";
 
-const MyForm = styled(Form)`
-  &.ui.form {
-    width: 100%;
-  }
-`;
-
-const SignUp = () => {
+const SignUp = React.forwardRef((props, innerRef) => {
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    password: ""
+  });
+  const inputOnChange = e =>
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  const formOnSubmit = e => {
+    e.preventDefault();
+    const newUser = {
+      name,
+      email,
+      password
+    };
+    const config = {
+      "Content-Type": "application/json"
+    };
+    const body = JSON.stringify(newUser);
+    console.log(body);
+  };
+  const { name, email, password } = formData;
   return (
-    <MyForm>
-      <Form.Input icon="user" iconPosition="left" placeholder="Name" />
-      <Form.Input icon="mail" iconPosition="left" placeholder="Email" />
-      <Form.Input
-        icon="protect"
-        iconPosition="left"
-        placeholder="Password"
-        type="password"
-      />
-      <Message
-        error
-        header="Action Forbidden"
-        content="You can only sign up for an account once with a given e-mail address."
-      />
-      <Button type="submit">Submit</Button>
-    </MyForm>
+    <Ref innerRef={innerRef}>
+      <Form onSubmit={formOnSubmit}>
+        <Form.Input
+          icon="user"
+          iconPosition="left"
+          placeholder="Name"
+          name="name"
+          value={name}
+          onChange={inputOnChange}
+        />
+        <Form.Input
+          icon="mail"
+          iconPosition="left"
+          placeholder="Email"
+          name="email"
+          value={email}
+          onChange={inputOnChange}
+        />
+        <Form.Input
+          icon="protect"
+          iconPosition="left"
+          placeholder="Password"
+          type="password"
+          name="password"
+          value={password}
+          onChange={inputOnChange}
+        />
+        <Message
+          error
+          header="Action Forbidden"
+          content="You can only sign up for an account once with a given e-mail address."
+        />
+        <Button fluid inverted type="submit">
+          <Icon name="plus square outline" />
+          Sign Up
+        </Button>
+        <Divider inverted horizontal>
+          or
+        </Divider>
+        <Button fluid inverted type="button" onClick={props.toggleAuth}>
+          change to: Log in
+        </Button>
+      </Form>
+    </Ref>
   );
-};
+});
 
 export default SignUp;
