@@ -1,12 +1,68 @@
 import * as types from "../actions/types";
 
-const initState = {};
+const initState = {
+  token: localStorage.getItem("token"),
+  isAuth: false,
+  loading: false,
+  user: null,
+  errors: {
+    signUpErrors: null,
+    signInErrors: null
+  }
+};
 
-const authReducer = (state = initState, action) => {
+export default (state = initState, action) => {
   switch (action.type) {
+    case types.LOAD_USER:
+      return {
+        ...state,
+        isAuth: true,
+        loading: false,
+        user: action.user
+      };
+    case types.LOGIN_SUCCESS:
+    case types.REGISTER_SUCCESS:
+      localStorage.setItem("token", action.token);
+      return {
+        ...state,
+        token: action.token,
+        isAuth: true,
+        loading: false,
+        errors: {
+          signUpErrors: null,
+          signInErrors: null
+        }
+      };
+    case types.REGISTER_ERRORS:
+      localStorage.removeItem("token");
+      return {
+        ...state,
+        token: null,
+        isAuth: false,
+        loading: false,
+        errors: {
+          ...state.errors,
+          signUpErrors: action.errors
+        }
+      };
+    case types.LOGIN_ERRORS:
+      localStorage.removeItem("token");
+      return {
+        ...state,
+        token: null,
+        isAuth: false,
+        loading: false,
+        errors: {
+          ...state.errors,
+          signInErrors: action.errors
+        }
+      };
+    case types.AUTH_START_LOADING:
+      return {
+        ...state,
+        loading: true
+      };
     default:
       return state;
   }
 };
-
-export default authReducer;

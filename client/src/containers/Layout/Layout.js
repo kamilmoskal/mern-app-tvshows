@@ -1,12 +1,16 @@
 import React from "react";
+import { ThemeProvider } from "styled-components";
+import { theme } from "../../utills/theme";
 
-const Layout = props => {
+const Layout = ({ children }) => {
   return (
-    <>
-      <nav />
-      <main>{props.children}</main>
-      <footer />
-    </>
+    <ThemeProvider theme={theme}>
+      <>
+        <nav />
+        <main>{children}</main>
+        <footer />
+      </>
+    </ThemeProvider>
   );
 };
 

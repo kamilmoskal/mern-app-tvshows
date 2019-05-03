@@ -1,11 +1,22 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { connect } from "react-redux";
 import Layout from "./containers/Layout/Layout";
 import Auth from "./containers/Auth/Auth";
-import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
+import GlobalStyle from "./GlobalStyles";
+import { loadUser } from "./store/actions/authActions";
+import setAuthToken from "./utills/setAuthToken";
 
-function App() {
+const App = ({ loadUser }) => {
+  useEffect(() => {
+    if (localStorage.token) {
+      setAuthToken(localStorage.token);
+      loadUser();
+    }
+  }, []);
   return (
     <BrowserRouter basename="/">
+      <GlobalStyle />
       <Layout>
         <Switch>
           <Route path="/" exact component={Auth} />
@@ -13,6 +24,9 @@ function App() {
       </Layout>
     </BrowserRouter>
   );
-}
+};
 
-export default App;
+export default connect(
+  null,
+  { loadUser }
+)(App);

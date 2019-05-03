@@ -1,21 +1,26 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
-import { registerUser } from "../../../store/actions/authActions";
-import { InputField, AniInputField } from "../../../components/UI/InputField";
+import { InputField } from "../../../components/UI/InputField";
 import Form from "../../../components/UI/Form";
 import Button from "../../../components/UI/Button";
 import TextButton from "../../../components/UI/TextButton";
+import { Link } from "react-router-dom";
+import { loginUser } from "../../../store/actions/authActions";
 import ErrorMsg from "../../../components/UI/ErrorMsg/ErrorMsg";
 import { CubeGrid } from "styled-spinkit";
 import posed from "react-pose";
 
 const AnimateForm = posed(Form)({
   closed: { y: "200px", opacity: 0 },
-  open: { y: "0", opacity: 1, transition: { type: "spring", mass: 0.7 } }
+  open: {
+    y: "0",
+    opacity: 1,
+    transition: { type: "spring", mass: 0.7 }
+  }
 });
-const SignUp = ({ errors, loading, registerUser, toggleAuth }) => {
+
+const SignIn = ({ errors, loading, loginUser, toggleAuth }) => {
   const [formData, setFormData] = useState({
-    name: "",
     email: "",
     password: ""
   });
@@ -23,28 +28,22 @@ const SignUp = ({ errors, loading, registerUser, toggleAuth }) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   const formOnSubmit = e => {
     e.preventDefault();
-    const newUser = {
-      name,
+    const userData = {
       email,
       password
     };
 
-    registerUser(newUser);
+    loginUser(userData);
+    setFormData({ email: "", password: "" });
   };
-  const { name, email, password } = formData;
+  const { email, password } = formData;
+
   if (loading) {
     return <CubeGrid color="#ec4d37" size={60} />;
   }
   return (
     <AnimateForm onSubmit={formOnSubmit} initialPose="closed" pose="open">
-      <h2>SIGN UP</h2>
-      <InputField
-        placeholder="Name"
-        type="text"
-        name="name"
-        value={name}
-        onChange={inputOnChange}
-      />
+      <h2>SIGN IN</h2>
       <InputField
         placeholder="Email"
         type="text"
@@ -60,21 +59,20 @@ const SignUp = ({ errors, loading, registerUser, toggleAuth }) => {
         onChange={inputOnChange}
       />
       {errors ? <ErrorMsg errors={errors} /> : null}
-      <Button type="submit">Register</Button>
+      <Button type="submit">Login</Button>
       <p>
-        You have already account?{" "}
-        <TextButton onClick={toggleAuth}>Sign In</TextButton>
+        No account? <TextButton onClick={toggleAuth}>Sign Up</TextButton>
       </p>
     </AnimateForm>
   );
 };
 
 const mapStateToProps = state => ({
-  errors: state.auth.errors.signUpErrors,
+  errors: state.auth.errors.signInErrors,
   loading: state.auth.loading
 });
 
 export default connect(
   mapStateToProps,
-  { registerUser }
-)(SignUp);
+  { loginUser }
+)(SignIn);
