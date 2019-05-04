@@ -28,6 +28,7 @@ export default posed(Toggler)({
   hover: {
     boxShadow: "0px 5px 10px rgba(0,0,0,0.2)"
   },
+  drag: { scale: 1.2 },
   press: {
     scale: 0.8,
     boxShadow: "0px 2px 5px rgba(0,0,0,0.1)"

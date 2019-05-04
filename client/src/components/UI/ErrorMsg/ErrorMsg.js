@@ -18,8 +18,8 @@ const AniErrorMsg = posed(ErrorWrapper)({
 });
 
 const ErrorMsg = ({ errors }) => {
-  errors = errors.map(error => (
-    <ErrorItem key={error.param}>- {error.msg}</ErrorItem>
+  errors = errors.map((error, index) => (
+    <ErrorItem key={error.param || index}>- {error.msg}</ErrorItem>
   ));
   return (
     <AniErrorMsg initialPose="closed" pose="open">

@@ -7,6 +7,7 @@ import GlobalStyle from "./GlobalStyles";
 import { loadUser } from "./store/actions/authActions";
 import setAuthToken from "./utills/setAuthToken";
 import Dashboard from "./containers/Dashboard/Dashboard";
+import Logout from "./containers/Auth/Logout/Logout";
 
 const App = ({ loadUser }) => {
   useEffect(() => {
@@ -22,6 +23,7 @@ const App = ({ loadUser }) => {
         <Switch>
           <Route path="/" exact component={Auth} />
           <Route path="/dashboard" component={Dashboard} />
+          <Route path="/logout" component={Logout} />
         </Switch>
       </Layout>
     </BrowserRouter>

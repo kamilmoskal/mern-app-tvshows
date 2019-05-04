@@ -72,4 +72,6 @@ export const clearAuthError = () => ({
   type: types.CLEAR_AUTH_ERRORS
 });
 
-export const logoutUser = (userData, history) => dispatch => {};
+export const logoutUser = () => dispatch => {
+  dispatch({ type: types.LOGOUT });
+};

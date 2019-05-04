@@ -43,7 +43,7 @@ const SideDrawer = ({ user, navIsOpen }) => {
           </StyledNavLink>
         </AnimatedNavItem>
         <AnimatedNavItem>
-          <StyledNavLink to="/sdgsdg">
+          <StyledNavLink to="/logout">
             <LogOut size="30" title="Logout" />
             Logout
           </StyledNavLink>

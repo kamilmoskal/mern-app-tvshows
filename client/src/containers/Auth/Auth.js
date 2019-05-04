@@ -9,7 +9,9 @@ import SignUp from "./SignUp/SignUp";
 const Auth = ({ bgUrl, getBg, isAuth }) => {
   const [isSignIn, setIsSignIn] = useState(true);
   useEffect(() => {
-    getBg();
+    if (!bgUrl) {
+      getBg();
+    }
   }, []);
   const toggleAuth = () => {
     setIsSignIn(prevIsSignIn => !prevIsSignIn);

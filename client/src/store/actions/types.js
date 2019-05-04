@@ -4,6 +4,7 @@ export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
 export const LOGIN_ERRORS = "LOGIN_ERRORS";
 export const LOAD_USER = "LOAD_USER";
 export const LOAD_USER_ERROR = "LOAD_USER_ERROR";
+export const LOGOUT = "LOGOUT";
 export const AUTH_START_LOADING = "AUTH_START_LOADING";
 export const CLEAR_AUTH_ERRORS = "CLEAR_AUTH_ERRORS";
 
