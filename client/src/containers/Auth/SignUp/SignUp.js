@@ -1,7 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
-import { registerUser } from "../../../store/actions/authActions";
-import { InputField, AniInputField } from "../../../components/UI/InputField";
+import {
+  registerUser,
+  clearAuthError
+} from "../../../store/actions/authActions";
+import { InputField } from "../../../components/UI/InputField";
 import Form from "../../../components/UI/Form";
 import Button from "../../../components/UI/Button";
 import TextButton from "../../../components/UI/TextButton";
@@ -13,12 +16,23 @@ const AnimateForm = posed(Form)({
   closed: { y: "200px", opacity: 0 },
   open: { y: "0", opacity: 1, transition: { type: "spring", mass: 0.7 } }
 });
-const SignUp = ({ errors, loading, registerUser, toggleAuth }) => {
+const SignUp = ({
+  errors,
+  loading,
+  registerUser,
+  toggleAuth,
+  clearAuthError
+}) => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     password: ""
   });
+  useEffect(() => {
+    return () => {
+      clearAuthError();
+    };
+  }, []);
   const inputOnChange = e =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
   const formOnSubmit = e => {
@@ -76,5 +90,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { registerUser }
+  { registerUser, clearAuthError }
 )(SignUp);

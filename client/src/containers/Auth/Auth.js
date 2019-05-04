@@ -6,7 +6,6 @@ import { Background, Wrapper } from "./styled";
 import { getBg } from "../../store/actions/moviedbActions";
 import SignIn from "./SignIn/SignIn";
 import SignUp from "./SignUp/SignUp";
-import { CubeGrid } from "styled-spinkit";
 
 const Auth = ({ bgUrl, getBg, isAuth }) => {
   const [isSignIn, setIsSignIn] = useState(true);

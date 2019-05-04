@@ -6,6 +6,7 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 import GlobalStyle from "./GlobalStyles";
 import { loadUser } from "./store/actions/authActions";
 import setAuthToken from "./utills/setAuthToken";
+import Dashboard from "./containers/Dashboard/Dashboard";
 
 const App = ({ loadUser }) => {
   useEffect(() => {
@@ -20,6 +21,7 @@ const App = ({ loadUser }) => {
       <Layout>
         <Switch>
           <Route path="/" exact component={Auth} />
+          <Route path="/dashboard" exact component={Dashboard} />
         </Switch>
       </Layout>
     </BrowserRouter>

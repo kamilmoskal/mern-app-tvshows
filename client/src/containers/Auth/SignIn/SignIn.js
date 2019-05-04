@@ -1,11 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import { InputField } from "../../../components/UI/InputField";
 import Form from "../../../components/UI/Form";
 import Button from "../../../components/UI/Button";
 import TextButton from "../../../components/UI/TextButton";
-import { Link } from "react-router-dom";
-import { loginUser } from "../../../store/actions/authActions";
+import { loginUser, clearAuthError } from "../../../store/actions/authActions";
 import ErrorMsg from "../../../components/UI/ErrorMsg/ErrorMsg";
 import { CubeGrid } from "styled-spinkit";
 import posed from "react-pose";
@@ -19,11 +18,16 @@ const AnimateForm = posed(Form)({
   }
 });
 
-const SignIn = ({ errors, loading, loginUser, toggleAuth }) => {
+const SignIn = ({ errors, loading, loginUser, toggleAuth, clearAuthError }) => {
   const [formData, setFormData] = useState({
     email: "",
     password: ""
   });
+  useEffect(() => {
+    return () => {
+      clearAuthError();
+    };
+  }, []);
   const inputOnChange = e =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
   const formOnSubmit = e => {
@@ -74,5 +78,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { loginUser }
+  { loginUser, clearAuthError }
 )(SignIn);

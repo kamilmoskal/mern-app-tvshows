@@ -21,7 +21,7 @@ export const registerUser = userData => dispatch => {
       .catch(err =>
         dispatch({
           type: types.REGISTER_ERRORS,
-          errors: err.response.data.errors
+          errors: { signUpErrors: err.response.data.errors }
         })
       );
   }, 1000);
@@ -46,7 +46,7 @@ export const loginUser = userData => dispatch => {
       .catch(err =>
         dispatch({
           type: types.LOGIN_ERRORS,
-          errors: err.response.data.errors
+          errors: { signInErrors: err.response.data.errors }
         })
       );
   }, 1000);
@@ -68,6 +68,8 @@ export const authStartLoading = () => {
   };
 };
 
-export const setCurrentUser = (userData, history) => {};
+export const clearAuthError = () => ({
+  type: types.CLEAR_AUTH_ERRORS
+});
 
 export const logoutUser = (userData, history) => dispatch => {};

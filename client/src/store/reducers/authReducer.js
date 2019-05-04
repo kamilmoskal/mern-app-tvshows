@@ -34,17 +34,6 @@ export default (state = initState, action) => {
         }
       };
     case types.REGISTER_ERRORS:
-      localStorage.removeItem("token");
-      return {
-        ...state,
-        token: null,
-        isAuth: false,
-        loading: false,
-        errors: {
-          ...state.errors,
-          signUpErrors: action.errors
-        }
-      };
     case types.LOGIN_ERRORS:
       localStorage.removeItem("token");
       return {
@@ -54,13 +43,21 @@ export default (state = initState, action) => {
         loading: false,
         errors: {
           ...state.errors,
-          signInErrors: action.errors
+          ...action.errors
         }
       };
     case types.AUTH_START_LOADING:
       return {
         ...state,
         loading: true
+      };
+    case types.CLEAR_AUTH_ERRORS:
+      return {
+        ...state,
+        errors: {
+          signUpErrors: null,
+          signInErrors: null
+        }
       };
     default:
       return state;
