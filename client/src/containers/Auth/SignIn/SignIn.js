@@ -25,7 +25,9 @@ const SignIn = ({ errors, loading, loginUser, toggleAuth, clearAuthError }) => {
   });
   useEffect(() => {
     return () => {
-      clearAuthError();
+      if (errors) {
+        clearAuthError();
+      }
     };
   }, []);
   const inputOnChange = e =>

@@ -30,7 +30,9 @@ const SignUp = ({
   });
   useEffect(() => {
     return () => {
-      clearAuthError();
+      if (errors) {
+        clearAuthError();
+      }
     };
   }, []);
   const inputOnChange = e =>

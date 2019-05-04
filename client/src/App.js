@@ -21,7 +21,7 @@ const App = ({ loadUser }) => {
       <Layout>
         <Switch>
           <Route path="/" exact component={Auth} />
-          <Route path="/dashboard" exact component={Dashboard} />
+          <Route path="/dashboard" component={Dashboard} />
         </Switch>
       </Layout>
     </BrowserRouter>

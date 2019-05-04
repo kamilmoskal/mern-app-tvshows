@@ -1,7 +1,12 @@
 import React from "react";
+import Container from "../../components/UI/Container";
 
 const Dashboard = () => {
-  return <div>asd</div>;
+  return (
+    <>
+      <Container />
+    </>
+  );
 };
 
 export default Dashboard;
