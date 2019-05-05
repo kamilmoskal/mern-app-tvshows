@@ -35,6 +35,7 @@ export default (state = initState, action) => {
       };
     case types.REGISTER_ERRORS:
     case types.LOGIN_ERRORS:
+    case types.LOAD_USER_ERROR:
     case types.LOGOUT:
       localStorage.removeItem("token");
       return {

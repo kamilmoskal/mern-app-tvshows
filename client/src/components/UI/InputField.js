@@ -13,6 +13,7 @@ export const InputField = styled.input`
   &:focus {
     border-left: 4px solid ${({ theme }) => theme.colors.primary};
     padding: 0.5rem 1rem;
+    outline: none;
   }
 
   ::placeholder {

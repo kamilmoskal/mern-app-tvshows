@@ -5,15 +5,20 @@ import { theme } from "../../utills/theme";
 import SideDrawer from "../../components/Navigation/SideDrawer/SideDrawer";
 import AnimatedToggler from "../../components/Navigation/Toggler";
 
-const Layout = ({ children, user }) => {
+const Layout = ({ children, isAuth, user }) => {
   const [navIsOpen, setNavIsOpen] = useState(true);
   return (
     <ThemeProvider theme={theme}>
       <>
-        <AnimatedToggler
-          onClick={() => setNavIsOpen(prevNavIsOpen => !prevNavIsOpen)}
-        />
-        <SideDrawer user={user} navIsOpen={navIsOpen} />
+        {isAuth ? (
+          <>
+            <AnimatedToggler
+              onClick={() => setNavIsOpen(prevNavIsOpen => !prevNavIsOpen)}
+            />
+            <SideDrawer user={user} navIsOpen={navIsOpen} />
+          </>
+        ) : null}
+
         <main>{children}</main>
         <footer />
       </>
@@ -22,6 +27,7 @@ const Layout = ({ children, user }) => {
 };
 
 const mapStateToProps = state => ({
+  isAuth: state.auth.isAuth,
   user: state.auth.user
 });
 

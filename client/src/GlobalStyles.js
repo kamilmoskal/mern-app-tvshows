@@ -5,7 +5,7 @@ export default createGlobalStyle`
         padding: 0;
         margin: 0;
         font-family: 'Roboto', sans-serif;
-        background-color: lightgray;
+        //background-color: lightgray;
     }
 
     *, *::before, *::after {

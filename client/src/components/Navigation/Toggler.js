@@ -19,7 +19,6 @@ const Toggler = styled(Menu)`
 export default posed(Toggler)({
   hoverable: true,
   pressable: true,
-  draggable: "x",
   init: {
     scale: 1,
     rotate: "0",
