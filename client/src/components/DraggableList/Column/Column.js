@@ -1,27 +1,8 @@
 import React from "react";
-import styled from "styled-components";
+import PropTypes from "prop-types";
 import { Droppable } from "react-beautiful-dnd";
-import Task from "./Task";
-
-const Container = styled.div`
-  margin: 8px;
-  border: 1px solid lightgrey;
-  border-radius: 2px;
-  width: 100%;
-
-  display: flex;
-  flex-direction: column;
-`;
-const Title = styled.h3`
-  padding: 8px;
-`;
-const TaskList = styled.div`
-  padding: 8px;
-  transition: all 0.2s ease;
-  background-color: ${props => (props.isDraggingOver ? "skyblue" : "white")};
-  flex-grow: 1;
-  min-height: 100px;
-`;
+import Task from "../Task/Task";
+import { Container, Title, TaskList } from "./styled";
 
 const InnerList = React.memo(
   ({ tasks }) => {
@@ -51,13 +32,18 @@ const Column = ({ column, tasks }) => {
             {/* {tasks.map((task, index) => (
               <Task key={task.id} task={task} index={index} />
             ))} */}
-            <InnerList tasks={tasks} />
+            {tasks.length > 0 ? <InnerList tasks={tasks} /> : null}
             {provided.placeholder}
           </TaskList>
         )}
       </Droppable>
     </Container>
   );
+};
+
+Column.propTypes = {
+  column: PropTypes.object.isRequired,
+  tasks: PropTypes.array.isRequired
 };
 
 export default Column;

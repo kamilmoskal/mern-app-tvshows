@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
 import { Background, Wrapper } from "./styled";
@@ -30,6 +31,12 @@ const Auth = ({ bgUrl, getBg, isAuth }) => {
       </Wrapper>
     </Background>
   );
+};
+
+Auth.propTypes = {
+  bgUrl: PropTypes.string.isRequired,
+  getBg: PropTypes.func.isRequired,
+  isAuth: PropTypes.bool.isRequired
 };
 
 const mapStateToProps = state => ({

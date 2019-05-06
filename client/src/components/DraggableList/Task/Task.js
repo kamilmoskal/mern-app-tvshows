@@ -1,35 +1,7 @@
 import React from "react";
-import styled from "styled-components";
+import PropTypes from "prop-types";
 import { Draggable } from "react-beautiful-dnd";
-
-const Container = styled.div`
-  margin-bottom: 8px;
-  padding: 8px;
-  border: 1px solid lightgrey;
-  border-radius: 2px;
-  background-color: ${props =>
-    props.isDragDisabled
-      ? "lightgrey"
-      : props.isDragging
-      ? "lightgreen"
-      : "white"};
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  &:focus {
-    outline: none;
-  }
-`;
-
-const Handle = styled.div`
-  width: 20px;
-  height: 20px;
-  background-color: orange;
-  border-radius: 4px;
-  margin-right: 8px;
-`;
+import { Container, Image } from "./styled";
 
 const Task = ({ task, index }) => {
   console.log("task");
@@ -49,11 +21,17 @@ const Task = ({ task, index }) => {
           // isDragDisabled={isDragDisabled}
         >
           {/* <Handle {...provided.dragHandleProps} /> */}
-          {task.content}
+          {task.name}
+          <Image bg={task.img} />
         </Container>
       )}
     </Draggable>
   );
+};
+
+Task.propTypes = {
+  task: PropTypes.object.isRequired,
+  index: PropTypes.number.isRequired
 };
 
 export default Task;

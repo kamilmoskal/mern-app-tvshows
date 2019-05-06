@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
+import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { InputField } from "../../../components/UI/InputField";
 import Form from "../../../components/UI/Form";
-import Button from "../../../components/UI/Button";
+import { Button } from "../../../components/UI/Button";
 import TextButton from "../../../components/UI/TextButton";
 import { loginUser, clearAuthError } from "../../../store/actions/authActions";
 import ErrorMsg from "../../../components/UI/ErrorMsg/ErrorMsg";
@@ -64,13 +65,23 @@ const SignIn = ({ errors, loading, loginUser, toggleAuth, clearAuthError }) => {
         value={password}
         onChange={inputOnChange}
       />
-      {errors ? <ErrorMsg errors={errors} /> : null}
-      <Button type="submit">Login</Button>
+      {errors.length > 0 ? <ErrorMsg errors={errors} /> : null}
+      <Button margin type="submit">
+        Login
+      </Button>
       <p>
         No account? <TextButton onClick={toggleAuth}>Sign Up</TextButton>
       </p>
     </AnimateForm>
   );
+};
+
+SignIn.propTypes = {
+  errors: PropTypes.array.isRequired,
+  loading: PropTypes.bool.isRequired,
+  loginUser: PropTypes.func.isRequired,
+  toggleAuth: PropTypes.func.isRequired,
+  clearAuthError: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({

@@ -10,3 +10,5 @@ export const CLEAR_AUTH_ERRORS = "CLEAR_AUTH_ERRORS";
 
 export const GETBG_SUCCESS = "GETBG_SUCCESS";
 export const GETBG_ERROR = "GETBG_ERROR";
+export const SEARCH_SUCCESS = "SEARCH_SUCCESS";
+export const SEARCH_ERROR = "SEARCH_ERROR";

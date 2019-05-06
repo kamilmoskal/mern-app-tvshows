@@ -1,20 +1,45 @@
 import React, { useState } from "react";
-import Column from "./Column";
+import Column from "./Column/Column";
 import { DragDropContext } from "react-beautiful-dnd";
-import styled from "styled-components";
+import { Container } from "./styled";
 
 const initialData = {
   tasks: {
-    "task-1": { id: "task-1", content: "1Take out the garbage" },
-    "task-2": { id: "task-2", content: "2Take out the garbage" },
-    "task-3": { id: "task-3", content: "3Take out the garbage" },
-    "task-4": { id: "task-4", content: "4Take out the garbage" }
+    // "task-1": {
+    //   id: "task-1",
+    //   name: "1Game of Thrones",
+    //   img: "http://image.tmdb.org/t/p/w92/u3bZgnGQ9T01sWNhyveQz0wH0Hl.jpg",
+    //   overview:
+    //     "Seven noble families fight for control of the mythical land of Westeros. Friction between the houses leads to full-scale war. All while a very ancient evil awakens in the farthest north. Amidst the war, a neglected military order of misfits, the Night's Watch, is all that stands between the realms of men and icy horrors beyond."
+    // },
+    // "task-2": {
+    //   id: "task-2",
+    //   name: "2Game of Thrones",
+    //   img: "http://image.tmdb.org/t/p/w92/u3bZgnGQ9T01sWNhyveQz0wH0Hl.jpg",
+    //   overview:
+    //     "Seven noble families fight for control of the mythical land of Westeros. Friction between the houses leads to full-scale war. All while a very ancient evil awakens in the farthest north. Amidst the war, a neglected military order of misfits, the Night's Watch, is all that stands between the realms of men and icy horrors beyond."
+    // },
+    // "task-3": {
+    //   id: "task-3",
+    //   name: "3Game of Thrones",
+    //   img: "http://image.tmdb.org/t/p/w92/u3bZgnGQ9T01sWNhyveQz0wH0Hl.jpg",
+    //   overview:
+    //     "Seven noble families fight for control of the mythical land of Westeros. Friction between the houses leads to full-scale war. All while a very ancient evil awakens in the farthest north. Amidst the war, a neglected military order of misfits, the Night's Watch, is all that stands between the realms of men and icy horrors beyond."
+    // },
+    // "task-4": {
+    //   id: "task-4",
+    //   name: "4Game of Thrones",
+    //   img: "http://image.tmdb.org/t/p/w92/u3bZgnGQ9T01sWNhyveQz0wH0Hl.jpg",
+    //   overview:
+    //     "Seven noble families fight for control of the mythical land of Westeros. Friction between the houses leads to full-scale war. All while a very ancient evil awakens in the farthest north. Amidst the war, a neglected military order of misfits, the Night's Watch, is all that stands between the realms of men and icy horrors beyond."
+    // }
   },
   columns: {
     "column-1": {
       id: "column-1",
-      title: "To do",
-      taskIds: ["task-1", "task-2", "task-3", "task-4"]
+      title: "To watch",
+      taskIds: []
+      //taskIds: ["task-1", "task-2", "task-3", "task-4"]
     },
     "column-2": {
       id: "column-2",
@@ -29,11 +54,6 @@ const initialData = {
   },
   columnOrder: ["column-1", "column-2", "column-3"]
 };
-
-const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-`;
 
 const DraggableList = () => {
   const [data, setData] = useState(initialData);
@@ -112,7 +132,6 @@ const DraggableList = () => {
     document.body.style.backgroundColor = `rgba(153,141,217, ${opacity})`;
   };
   console.log("draggablelist");
-  console.log(data);
   return (
     <DragDropContext
       onDragStart={onDragStart}
@@ -131,4 +150,4 @@ const DraggableList = () => {
   );
 };
 
-export default DraggableList;
+export default React.memo(DraggableList);

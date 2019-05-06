@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import {
   registerUser,
@@ -6,7 +7,7 @@ import {
 } from "../../../store/actions/authActions";
 import { InputField } from "../../../components/UI/InputField";
 import Form from "../../../components/UI/Form";
-import Button from "../../../components/UI/Button";
+import { Button } from "../../../components/UI/Button";
 import TextButton from "../../../components/UI/TextButton";
 import ErrorMsg from "../../../components/UI/ErrorMsg/ErrorMsg";
 import { CubeGrid } from "styled-spinkit";
@@ -75,14 +76,24 @@ const SignUp = ({
         value={password}
         onChange={inputOnChange}
       />
-      {errors ? <ErrorMsg errors={errors} /> : null}
-      <Button type="submit">Register</Button>
+      {errors.length > 0 ? <ErrorMsg errors={errors} /> : null}
+      <Button margin type="submit">
+        Register
+      </Button>
       <p>
         You have already account?{" "}
         <TextButton onClick={toggleAuth}>Sign In</TextButton>
       </p>
     </AnimateForm>
   );
+};
+
+SignUp.propTypes = {
+  errors: PropTypes.array.isRequired,
+  loading: PropTypes.bool.isRequired,
+  registerUser: PropTypes.func.isRequired,
+  toggleAuth: PropTypes.func.isRequired,
+  clearAuthError: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({

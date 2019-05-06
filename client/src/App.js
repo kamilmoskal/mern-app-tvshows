@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import Layout from "./containers/Layout/Layout";
 import Auth from "./containers/Auth/Auth";
@@ -28,6 +29,10 @@ const App = ({ loadUser }) => {
       </Layout>
     </BrowserRouter>
   );
+};
+
+App.propTypes = {
+  loadUser: PropTypes.func.isRequired
 };
 
 export default connect(

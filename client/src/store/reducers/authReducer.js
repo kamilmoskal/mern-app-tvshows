@@ -6,8 +6,8 @@ const initState = {
   loading: false,
   user: null,
   errors: {
-    signUpErrors: null,
-    signInErrors: null
+    signUpErrors: [],
+    signInErrors: []
   }
 };
 
@@ -29,8 +29,8 @@ export default (state = initState, action) => {
         isAuth: true,
         loading: false,
         errors: {
-          signUpErrors: null,
-          signInErrors: null
+          signUpErrors: [],
+          signInErrors: []
         }
       };
     case types.REGISTER_ERRORS:
@@ -58,8 +58,8 @@ export default (state = initState, action) => {
       return {
         ...state,
         errors: {
-          signUpErrors: null,
-          signInErrors: null
+          signUpErrors: [],
+          signInErrors: []
         }
       };
     default:
