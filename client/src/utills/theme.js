@@ -2,6 +2,7 @@ import { colors } from "./colors";
 
 export const theme = {
   colors,
+  card: "0 1px 3px rgba(0, 0, 0, 0.05), 0 1px 3px rgba(0, 0, 0, 0.2)",
   font: {
     thin: 300,
     regular: 400,

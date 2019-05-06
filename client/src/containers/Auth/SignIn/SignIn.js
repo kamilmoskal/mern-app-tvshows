@@ -1,36 +1,31 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { InputField } from "../../../components/UI/InputField";
-import Form from "../../../components/UI/Form";
+import { AnimateForm } from "../../../components/UI/Form";
 import { Button } from "../../../components/UI/Button";
 import TextButton from "../../../components/UI/TextButton";
 import { loginUser, clearAuthError } from "../../../store/actions/authActions";
 import ErrorMsg from "../../../components/UI/ErrorMsg/ErrorMsg";
 import { CubeGrid } from "styled-spinkit";
-import posed from "react-pose";
 
-const AnimateForm = posed(Form)({
-  closed: { y: "200px", opacity: 0 },
-  open: {
-    y: "0",
-    opacity: 1,
-    transition: { type: "spring", mass: 0.7 }
-  }
-});
-
-const SignIn = ({ errors, loading, loginUser, toggleAuth, clearAuthError }) => {
+const SignIn = ({ errors, loading, toggleAuth, dispatch }) => {
   const [formData, setFormData] = useState({
     email: "",
     password: ""
   });
+  const errorsRef = useRef();
+  useEffect(() => {
+    errorsRef.current = errors;
+  }, [errors]);
   useEffect(() => {
     return () => {
-      if (errors) {
-        clearAuthError();
+      if (errorsRef.current.length > 0) {
+        dispatch(clearAuthError());
       }
     };
-  }, []);
+  }, [dispatch]);
+
   const inputOnChange = e =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
   const formOnSubmit = e => {
@@ -40,7 +35,7 @@ const SignIn = ({ errors, loading, loginUser, toggleAuth, clearAuthError }) => {
       password
     };
 
-    loginUser(userData);
+    dispatch(loginUser(userData));
     setFormData({ email: "", password: "" });
   };
   const { email, password } = formData;
@@ -79,9 +74,8 @@ const SignIn = ({ errors, loading, loginUser, toggleAuth, clearAuthError }) => {
 SignIn.propTypes = {
   errors: PropTypes.array.isRequired,
   loading: PropTypes.bool.isRequired,
-  loginUser: PropTypes.func.isRequired,
   toggleAuth: PropTypes.func.isRequired,
-  clearAuthError: PropTypes.func.isRequired
+  dispatch: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
@@ -89,7 +83,4 @@ const mapStateToProps = state => ({
   loading: state.auth.loading
 });
 
-export default connect(
-  mapStateToProps,
-  { loginUser, clearAuthError }
-)(SignIn);
+export default connect(mapStateToProps)(SignIn);

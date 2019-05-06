@@ -7,13 +7,13 @@ import { getBg } from "../../store/actions/moviedbActions";
 import SignIn from "./SignIn/SignIn";
 import SignUp from "./SignUp/SignUp";
 
-const Auth = ({ bgUrl, getBg, isAuth }) => {
+const Auth = ({ bgUrl, dispatch, isAuth }) => {
   const [isSignIn, setIsSignIn] = useState(true);
   useEffect(() => {
     if (!bgUrl) {
-      getBg();
+      dispatch(getBg());
     }
-  }, []);
+  }, [dispatch, bgUrl]);
   const toggleAuth = () => {
     setIsSignIn(prevIsSignIn => !prevIsSignIn);
   };
@@ -35,7 +35,7 @@ const Auth = ({ bgUrl, getBg, isAuth }) => {
 
 Auth.propTypes = {
   bgUrl: PropTypes.string.isRequired,
-  getBg: PropTypes.func.isRequired,
+  dispatch: PropTypes.func.isRequired,
   isAuth: PropTypes.bool.isRequired
 };
 
@@ -44,7 +44,4 @@ const mapStateToProps = state => ({
   isAuth: state.auth.isAuth
 });
 
-export default connect(
-  mapStateToProps,
-  { getBg }
-)(Auth);
+export default connect(mapStateToProps)(Auth);

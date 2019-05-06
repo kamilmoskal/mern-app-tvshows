@@ -1,6 +1,5 @@
 import * as types from "./types";
 import axios from "axios";
-import setAuthToken from "../../utills/setAuthToken";
 
 const API_KEY = "4bba9cc0bb6eb5b67b64c5a5a057e2fc";
 

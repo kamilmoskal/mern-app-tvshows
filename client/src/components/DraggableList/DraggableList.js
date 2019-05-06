@@ -5,20 +5,20 @@ import { Container } from "./styled";
 
 const initialData = {
   tasks: {
-    // "task-1": {
-    //   id: "task-1",
-    //   name: "1Game of Thrones",
-    //   img: "http://image.tmdb.org/t/p/w92/u3bZgnGQ9T01sWNhyveQz0wH0Hl.jpg",
-    //   overview:
-    //     "Seven noble families fight for control of the mythical land of Westeros. Friction between the houses leads to full-scale war. All while a very ancient evil awakens in the farthest north. Amidst the war, a neglected military order of misfits, the Night's Watch, is all that stands between the realms of men and icy horrors beyond."
-    // },
-    // "task-2": {
-    //   id: "task-2",
-    //   name: "2Game of Thrones",
-    //   img: "http://image.tmdb.org/t/p/w92/u3bZgnGQ9T01sWNhyveQz0wH0Hl.jpg",
-    //   overview:
-    //     "Seven noble families fight for control of the mythical land of Westeros. Friction between the houses leads to full-scale war. All while a very ancient evil awakens in the farthest north. Amidst the war, a neglected military order of misfits, the Night's Watch, is all that stands between the realms of men and icy horrors beyond."
-    // },
+    "task-1": {
+      id: "task-1",
+      name: "1Game of Thrones",
+      img: "http://image.tmdb.org/t/p/w92/u3bZgnGQ9T01sWNhyveQz0wH0Hl.jpg",
+      overview:
+        "Seven noble families fight for control of the mythical land of Westeros. Friction between the houses leads to full-scale war. All while a very ancient evil awakens in the farthest north. Amidst the war, a neglected military order of misfits, the Night's Watch, is all that stands between the realms of men and icy horrors beyond."
+    },
+    "task-2": {
+      id: "task-2",
+      name: "2Game of Thrones",
+      img: "http://image.tmdb.org/t/p/w92/u3bZgnGQ9T01sWNhyveQz0wH0Hl.jpg",
+      overview:
+        "Seven noble families fight for control of the mythical land of Westeros. Friction between the houses leads to full-scale war. All while a very ancient evil awakens in the farthest north. Amidst the war, a neglected military order of misfits, the Night's Watch, is all that stands between the realms of men and icy horrors beyond."
+    }
     // "task-3": {
     //   id: "task-3",
     //   name: "3Game of Thrones",
@@ -38,17 +38,17 @@ const initialData = {
     "column-1": {
       id: "column-1",
       title: "To watch",
-      taskIds: []
+      taskIds: ["task-1", "task-2"]
       //taskIds: ["task-1", "task-2", "task-3", "task-4"]
     },
     "column-2": {
       id: "column-2",
-      title: "In progress",
+      title: "Watched",
       taskIds: []
     },
     "column-3": {
       id: "column-3",
-      title: "Done",
+      title: "In progress",
       taskIds: []
     }
   },
@@ -117,11 +117,11 @@ const DraggableList = () => {
       setData(newState);
     }
 
-    document.body.style.color = "inherit";
+    //document.body.style.color = "inherit";
     document.body.style.backgroundColor = "inherit";
   };
   const onDragStart = start => {
-    document.body.style.color = "orange";
+    //document.body.style.color = "orange";
     document.body.style.transition = "background-color 0.2s ease";
   };
   const onDragUpdate = update => {

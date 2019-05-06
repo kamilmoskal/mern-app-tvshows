@@ -24,6 +24,15 @@ const UserSchema = new Schema({
   date: {
     type: Date,
     default: Date.now
+  },
+  tvShows: {
+    type: Object,
+    default: {
+      shows: [],
+      column1: [],
+      column2: [],
+      column3: []
+    }
   }
 });
 

@@ -1,9 +1,9 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-  margin-bottom: 8px;
-  padding: 8px;
-  border: 1px solid lightgrey;
+  margin-bottom: 2px;
+  padding-left: 10px;
+  box-shadow: ${({ theme }) => theme.card};
   border-radius: 2px;
   background-color: ${props =>
     props.isDragDisabled
@@ -13,7 +13,7 @@ export const Container = styled.div`
       : "white"};
 
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
 
   &:focus {

@@ -5,6 +5,7 @@ import Container from "../../components/UI/Container";
 import DraggableList from "../../components/DraggableList/DraggableList";
 import Search from "../../components/Search/Search";
 import { searchShow } from "../../store/actions/moviedbActions";
+import { ListWrapper } from "./styled";
 
 const Dashboard = ({ searchShow, searchResults }) => {
   const searchOnChange = e => {
@@ -16,12 +17,14 @@ const Dashboard = ({ searchShow, searchResults }) => {
   return (
     <>
       <Container>
-        <Search
-          searchOnChange={searchOnChange}
-          searchResults={searchResults}
-          addShowToProfile={addShowToProfile}
-        />
-        <DraggableList />
+        <ListWrapper>
+          <Search
+            searchOnChange={searchOnChange}
+            searchResults={searchResults}
+            addShowToProfile={addShowToProfile}
+          />
+          <DraggableList />
+        </ListWrapper>
       </Container>
     </>
   );

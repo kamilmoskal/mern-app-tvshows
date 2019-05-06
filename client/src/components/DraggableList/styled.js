@@ -1,10 +1,10 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-gap: 10px;
 
   ${({ theme }) => theme.media.tablet} {
-    flex-direction: row;
+    grid-template-columns: 1fr 1fr 1fr;
   }
 `;

@@ -4,18 +4,15 @@ import { Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import { logoutUser } from "../../../store/actions/authActions";
 
-const Logout = ({ logoutUser }) => {
+const Logout = ({ dispatch }) => {
   useEffect(() => {
-    logoutUser();
-  }, []);
+    dispatch(logoutUser());
+  }, [dispatch]);
   return <Redirect to="/" />;
 };
 
 Logout.propTypes = {
-  logoutUser: PropTypes.func.isRequired
+  dispatch: PropTypes.func.isRequired
 };
 
-export default connect(
-  null,
-  { logoutUser }
-)(Logout);
+export default connect()(Logout);

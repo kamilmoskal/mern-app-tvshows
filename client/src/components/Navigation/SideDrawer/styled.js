@@ -10,7 +10,7 @@ export const Nav = styled.nav`
   height: 100vh;
   //overflow: scroll;
   background-color: ${({ theme }) => theme.colors.white};
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05), 0 1px 3px rgba(0, 0, 0, 0.1);
+  box-shadow: ${({ theme }) => theme.card};
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -99,7 +99,7 @@ export const StyledNavLink = styled(NavLink)`
   &.active {
     color: ${({ theme }) => theme.colors.primary};
     grid-gap: 10px;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05), 0 1px 3px rgba(0, 0, 0, 0.1);
+    box-shadow: ${({ theme }) => theme.card};
   }
 `;
 

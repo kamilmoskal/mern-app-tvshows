@@ -4,6 +4,7 @@ const { check, validationResult } = require("express-validator/check");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const config = require("config");
+const auth = require("../../middleware/auth");
 
 // Load User model
 const User = require("../../models/User");
@@ -95,5 +96,21 @@ router.post(
     });
   }
 );
+
+// @route   POST api/users/tv-shows
+// @desc    Add tv-show to user
+// @access  Private
+router.post("/tv-shows", auth, (req, res) => {
+  const newTvShow = req.body;
+  User.findById(req.user.id).then(user => {
+    if (user) {
+      user.tvShows.shows.unshift(newTvShow);
+
+      user.save().then(user => res.json(user));
+    } else {
+      return res.status(400).json({ msg: "Error" });
+    }
+  });
+});
 
 module.exports = router;

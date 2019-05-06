@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import {
@@ -6,36 +6,29 @@ import {
   clearAuthError
 } from "../../../store/actions/authActions";
 import { InputField } from "../../../components/UI/InputField";
-import Form from "../../../components/UI/Form";
+import { AnimateForm } from "../../../components/UI/Form";
 import { Button } from "../../../components/UI/Button";
 import TextButton from "../../../components/UI/TextButton";
 import ErrorMsg from "../../../components/UI/ErrorMsg/ErrorMsg";
 import { CubeGrid } from "styled-spinkit";
-import posed from "react-pose";
 
-const AnimateForm = posed(Form)({
-  closed: { y: "200px", opacity: 0 },
-  open: { y: "0", opacity: 1, transition: { type: "spring", mass: 0.7 } }
-});
-const SignUp = ({
-  errors,
-  loading,
-  registerUser,
-  toggleAuth,
-  clearAuthError
-}) => {
+const SignUp = ({ errors, loading, toggleAuth, dispatch }) => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     password: ""
   });
+  const errorsRef = useRef();
+  useEffect(() => {
+    errorsRef.current = errors;
+  }, [errors]);
   useEffect(() => {
     return () => {
-      if (errors) {
-        clearAuthError();
+      if (errorsRef.current.length > 0) {
+        dispatch(clearAuthError());
       }
     };
-  }, []);
+  }, [dispatch]);
   const inputOnChange = e =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
   const formOnSubmit = e => {
@@ -46,7 +39,7 @@ const SignUp = ({
       password
     };
 
-    registerUser(newUser);
+    dispatch(registerUser(newUser));
   };
   const { name, email, password } = formData;
   if (loading) {
@@ -91,9 +84,8 @@ const SignUp = ({
 SignUp.propTypes = {
   errors: PropTypes.array.isRequired,
   loading: PropTypes.bool.isRequired,
-  registerUser: PropTypes.func.isRequired,
   toggleAuth: PropTypes.func.isRequired,
-  clearAuthError: PropTypes.func.isRequired
+  dispatch: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
@@ -101,7 +93,4 @@ const mapStateToProps = state => ({
   loading: state.auth.loading
 });
 
-export default connect(
-  mapStateToProps,
-  { registerUser, clearAuthError }
-)(SignUp);
+export default connect(mapStateToProps)(SignUp);

@@ -10,13 +10,13 @@ import setAuthToken from "./utills/setAuthToken";
 import Dashboard from "./containers/Dashboard/Dashboard";
 import Logout from "./containers/Auth/Logout/Logout";
 
-const App = ({ loadUser }) => {
+const App = ({ dispatch }) => {
   useEffect(() => {
     if (localStorage.token) {
       setAuthToken(localStorage.token);
-      loadUser();
+      dispatch(loadUser());
     }
-  }, []);
+  }, [dispatch]);
   return (
     <BrowserRouter basename="/">
       <GlobalStyle />
@@ -32,10 +32,7 @@ const App = ({ loadUser }) => {
 };
 
 App.propTypes = {
-  loadUser: PropTypes.func.isRequired
+  dispatch: PropTypes.func.isRequired
 };
 
-export default connect(
-  null,
-  { loadUser }
-)(App);
+export default connect()(App);
