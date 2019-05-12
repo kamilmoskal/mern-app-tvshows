@@ -22,7 +22,7 @@ const Task = ({ task, index }) => {
         >
           {/* <Handle {...provided.dragHandleProps} /> */}
           {task.name}
-          <Image bg={task.img} />
+          <Image bg={task.poster} />
         </Container>
       )}
     </Draggable>

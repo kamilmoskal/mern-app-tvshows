@@ -97,18 +97,23 @@ router.post(
   }
 );
 
-// @route   POST api/users/tv-shows
-// @desc    Add tv-show to user
+// @route   PUT api/users/tv-shows/update
+// @desc    Update tvShows data
 // @access  Private
-router.post("/tv-shows", auth, (req, res) => {
-  const newTvShow = req.body;
+router.put("/tv-shows/update", auth, (req, res) => {
   User.findById(req.user.id).then(user => {
     if (user) {
-      user.tvShows.shows.unshift(newTvShow);
-
-      user.save().then(user => res.json(user));
+      user.tvShows = req.body;
+      user
+        .save()
+        .then(user => res.json({ messages: [{ msg: "TV-Show list updated" }] }))
+        .catch(err =>
+          res
+            .status(400)
+            .json({ errors: [{ msg: "Error while updating TV-Show list" }] })
+        );
     } else {
-      return res.status(400).json({ msg: "Error" });
+      return res.status(400).json({ msg: "User not found" });
     }
   });
 });

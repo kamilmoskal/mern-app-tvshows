@@ -58,7 +58,10 @@ export const loadUser = () => dispatch => {
   }
   axios
     .get("/api/auth")
-    .then(res => dispatch({ type: types.LOAD_USER, user: res.data }))
+    .then(res => {
+      dispatch({ type: types.LOAD_USER, user: res.data });
+      dispatch({ type: types.LOAD_TVSHOWS, data: res.data.tvShows });
+    })
     .catch(err => dispatch({ type: types.LOAD_USER_ERROR }));
 };
 

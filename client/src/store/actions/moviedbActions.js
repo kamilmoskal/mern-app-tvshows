@@ -21,7 +21,7 @@ export const getBg = () => dispatch => {
     .catch(err => dispatch({ type: types.GETBG_ERROR }));
 };
 
-export const searchShow = query => dispatch => {
+export const searchTVShow = query => dispatch => {
   axios
     .create({
       transformRequest: [

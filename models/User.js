@@ -26,13 +26,19 @@ const UserSchema = new Schema({
     default: Date.now
   },
   tvShows: {
-    type: Object,
-    default: {
-      shows: [],
-      column1: [],
-      column2: [],
-      column3: []
-    }
+    shows: [
+      {
+        id: Number,
+        name: String,
+        date: String,
+        overview: String,
+        poster: String,
+        vote: Number
+      }
+    ],
+    towatch: [Number],
+    inprogress: [Number],
+    watched: [Number]
   }
 });
 

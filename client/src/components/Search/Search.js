@@ -4,7 +4,7 @@ import { Container, SearchList, SearchItem, AniAddBox } from "./styled";
 import { InputField } from "../UI/InputField";
 import { Message } from "../UI/Message";
 
-const Search = ({ searchOnChange, searchResults, addShowToProfile }) => {
+const Search = ({ searchOnChange, searchResults, addShowToList }) => {
   const [searchValue, setSearchValue] = useState("");
   const onChange = e => {
     setSearchValue(e.target.value);
@@ -29,7 +29,7 @@ const Search = ({ searchOnChange, searchResults, addShowToProfile }) => {
                 <AniAddBox
                   size={30}
                   title="Add to profile"
-                  onClick={() => addShowToProfile(result)}
+                  onClick={() => addShowToList(result)}
                 />{" "}
                 {result.name} <strong>({result.date})</strong>
               </SearchItem>
@@ -46,7 +46,7 @@ const Search = ({ searchOnChange, searchResults, addShowToProfile }) => {
 Search.propTypes = {
   searchOnChange: PropTypes.func.isRequired,
   searchResults: PropTypes.array.isRequired,
-  addShowToProfile: PropTypes.func.isRequired
+  addShowToList: PropTypes.func.isRequired
 };
 
 export default Search;
