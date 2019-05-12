@@ -6,9 +6,19 @@ import { Message } from "../UI/Message";
 
 const Search = ({ searchOnChange, searchResults, addShowToList }) => {
   const [searchValue, setSearchValue] = useState("");
+  const [typingTimeout, setTypingTimeout] = useState(null);
   const onChange = e => {
-    setSearchValue(e.target.value);
-    searchOnChange(e.target.value);
+    const value = e.target.value;
+    setSearchValue(value);
+
+    if (typingTimeout) {
+      clearTimeout(typingTimeout);
+    }
+    setTypingTimeout(
+      setTimeout(() => {
+        searchOnChange(value);
+      }, 500)
+    );
   };
   return (
     <Container>
