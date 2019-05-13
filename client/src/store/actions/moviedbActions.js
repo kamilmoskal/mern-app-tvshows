@@ -40,8 +40,11 @@ export const searchTVShow = query => dispatch => {
         name: result.name,
         date: result.first_air_date.substring(0, 4),
         overview: result.overview,
-        poster: `http://image.tmdb.org/t/p/w92/${result.poster_path}`,
-        vote: result.vote_average
+        poster:
+          result.poster_path !== null
+            ? `http://image.tmdb.org/t/p/w92/${result.poster_path}`
+            : "http://via.placeholder.com/100",
+        vote: result.vote_average.toFixed(1)
       }));
       dispatch({ type: types.SEARCH_SUCCESS, searchResults });
     })

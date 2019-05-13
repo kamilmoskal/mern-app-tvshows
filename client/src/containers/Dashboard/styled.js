@@ -6,6 +6,6 @@ export const ListWrapper = styled.div`
   margin: 10px 0;
 
   ${({ theme }) => theme.media.desktop} {
-    grid-template-columns: 1fr 2fr;
+    grid-template-columns: 30% 70%;
   }
 `;

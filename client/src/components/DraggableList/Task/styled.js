@@ -1,23 +1,36 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
+  text-align: center;
   margin-bottom: 2px;
   padding-left: 10px;
+  box-sizing: border-box;
   box-shadow: ${({ theme }) => theme.card};
   border-radius: 2px;
-  background-color: ${props =>
+  border-left: 4px solid;
+  border-color: ${props =>
     props.isDragDisabled
-      ? "lightgrey"
+      ? `${props.theme.colors.primaryDark}`
       : props.isDragging
-      ? "lightgreen"
+      ? `${props.theme.colors.primary}`
       : "white"};
+  background-color: white;
+  display: grid;
+  font-size: 0.9rem;
 
-  display: flex;
-  justify-content: space-between;
+  font-weight: ${props => (props.columnId ? "700" : "400")};
+  grid-template-columns: ${props =>
+    props.columnId ? "3fr 1fr 1fr" : ".5fr 1fr 4fr 2fr 2fr;"};
+  grid-gap: 4%;
+  justify-content: center;
   align-items: center;
 
   &:focus {
     outline: none;
+  }
+
+  ${({ theme }) => theme.media.semitablet} {
+    font-size: ${props => (props.columnId ? "1.2rem" : "1rem")};
   }
 `;
 
@@ -30,10 +43,16 @@ export const Handle = styled.div`
 `;
 
 export const Image = styled.div`
-  width: 50px;
-  height: 50px;
-  background-image: ${props => (props.bg ? `url('${props.bg}')` : "none")};
+  width: ${props => (props.columnId ? "70px" : "50px")};
+  height: ${props => (props.columnId ? "70px" : "50px")};
+  background-image: ${props => (props.bg ? `url('${props.bg}')` : "gray")};
   background-position: center center;
   background-repeat: no-repeat;
-  background-size: 50px;
+  background-size: ${props => (props.columnId ? "70px" : "50px")};
+
+  ${({ theme }) => theme.media.tablet} {
+    width: ${props => (props.columnId ? "100px" : "50px")};
+    height: ${props => (props.columnId ? "100px" : "50px")};
+    background-size: ${props => (props.columnId ? "100px" : "50px")};
+  }
 `;

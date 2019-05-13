@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { Container, SearchList, SearchItem, AniAddBox } from "./styled";
 import { InputField } from "../UI/InputField";
 import { Message } from "../UI/Message";
+import { CubeGrid } from "styled-spinkit";
 
 const Search = ({ searchOnChange, searchResults, addShowToList }) => {
   const [searchValue, setSearchValue] = useState("");

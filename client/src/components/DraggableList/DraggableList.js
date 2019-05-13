@@ -70,18 +70,18 @@ const DraggableList = ({ tvShowList, saveListToDB }) => {
     }
 
     //document.body.style.color = "inherit";
-    document.body.style.backgroundColor = "inherit";
+    //document.body.style.backgroundColor = "inherit";
   };
   const onDragStart = start => {
     //document.body.style.color = "orange";
-    document.body.style.transition = "background-color 0.2s ease";
+    //document.body.style.transition = "background-color 0.2s ease";
   };
   const onDragUpdate = update => {
     const { destination } = update;
     const opacity = destination
       ? destination.index / Object.keys(tasks).length
       : 0;
-    document.body.style.backgroundColor = `rgba(153,141,217, ${opacity})`;
+    // document.body.style.backgroundColor = `rgba(153,141,217, ${opacity})`;
   };
   console.log("draggablelist");
   return (

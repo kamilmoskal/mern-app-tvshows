@@ -24,7 +24,7 @@ export const transformedShowList = createSelector(
           taskIds: []
         }
       },
-      columnOrder: ["towatch", "watched", "inprogress"]
+      columnOrder: ["inprogress", "towatch", "watched"]
     };
     showListData.shows.forEach(show => {
       transformedData.tasks[show.id] = show;

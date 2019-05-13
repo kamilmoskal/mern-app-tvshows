@@ -5,9 +5,9 @@ import Task from "../Task/Task";
 import { Container, Title, TaskList } from "./styled";
 
 const InnerList = React.memo(
-  ({ tasks }) => {
+  ({ tasks, columnId }) => {
     return tasks.map((task, index) => (
-      <Task key={task.id} task={task} index={index} />
+      <Task key={task.id} task={task} index={index} columnId={columnId} />
     ));
   },
   (prevProps, newProps) => newProps.tasks === prevProps.tasks
@@ -16,7 +16,7 @@ const InnerList = React.memo(
 const Column = ({ column, tasks }) => {
   console.log("column");
   return (
-    <Container>
+    <Container columnId={column.id === "watched"}>
       <Title>{column.title}</Title>
       <Droppable
         droppableId={column.id}
@@ -32,7 +32,9 @@ const Column = ({ column, tasks }) => {
             {/* {tasks.map((task, index) => (
               <Task key={task.id} task={task} index={index} />
             ))} */}
-            {tasks.length > 0 ? <InnerList tasks={tasks} /> : null}
+            {tasks.length > 0 ? (
+              <InnerList tasks={tasks} columnId={column.id} />
+            ) : null}
             {provided.placeholder}
           </TaskList>
         )}
