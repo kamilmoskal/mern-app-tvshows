@@ -16,7 +16,7 @@ const InnerList = React.memo(
 const Column = ({ column, tasks }) => {
   console.log("column");
   return (
-    <Container columnId={column.id === "watched"}>
+    <Container columnId={column.id === "inprogress"}>
       <Title>{column.title}</Title>
       <Droppable
         droppableId={column.id}

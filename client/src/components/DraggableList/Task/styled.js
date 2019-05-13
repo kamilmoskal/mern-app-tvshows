@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import posed from "react-pose";
 
 export const Container = styled.div`
   text-align: center;
@@ -16,7 +17,7 @@ export const Container = styled.div`
       : "white"};
   background-color: white;
   display: grid;
-  font-size: 0.9rem;
+  font-size: 0.8rem;
 
   font-weight: ${props => (props.columnId ? "700" : "400")};
   grid-template-columns: ${props =>
@@ -30,9 +31,23 @@ export const Container = styled.div`
   }
 
   ${({ theme }) => theme.media.semitablet} {
-    font-size: ${props => (props.columnId ? "1.2rem" : "1rem")};
+    font-size: ${props => (props.columnId ? "1rem" : ".9rem")};
   }
 `;
+
+export const AniContainer = posed(Container)({
+  closed: { y: "200px", opacity: 0 },
+  open: {
+    y: "0",
+    opacity: 1,
+    transition: {
+      type: "spring",
+      stiffness: 100,
+      delay: 200,
+      duration: 500
+    }
+  }
+});
 
 export const Handle = styled.div`
   width: 20px;

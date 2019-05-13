@@ -3,6 +3,8 @@ import PropTypes from "prop-types";
 import Column from "./Column/Column";
 import { DragDropContext } from "react-beautiful-dnd";
 import { Container } from "./styled";
+import { AnimatedButton } from "../UI/Button";
+import { Message } from "../UI/Message";
 
 const DraggableList = ({ tvShowList, saveListToDB }) => {
   const [tasks, setTasks] = useState(null);
@@ -102,9 +104,18 @@ const DraggableList = ({ tvShowList, saveListToDB }) => {
                 );
               })
             : null}
-          <button onClick={() => saveListToDB({ tasks, columns })}>
-            save changes
-          </button>
+          <div>
+            <Message small>
+              *After each time you modified or added new items to list, you
+              should save changes or you will lost them
+            </Message>
+            <AnimatedButton
+              margin
+              onClick={() => saveListToDB({ tasks, columns })}
+            >
+              Save changes
+            </AnimatedButton>
+          </div>
         </Container>
       </DragDropContext>
     </>
@@ -112,7 +123,11 @@ const DraggableList = ({ tvShowList, saveListToDB }) => {
 };
 
 DraggableList.propTypes = {
-  tvShowList: PropTypes.object.isRequired
+  tvShowList: PropTypes.object.isRequired,
+  saveListToDB: PropTypes.func.isRequired
 };
 
-export default React.memo(DraggableList);
+export default React.memo(
+  DraggableList,
+  (prevProps, newProps) => newProps.tvShowList === prevProps.tvShowList
+);

@@ -13,6 +13,20 @@ export const SearchList = styled.ul`
   border-left: 2px solid ${({ theme }) => theme.colors.primary};
 `;
 
+export const AniSearchList = posed(SearchList)({
+  closed: { x: "200px", opacity: 0 },
+  open: {
+    x: "0",
+    opacity: 1,
+    transition: {
+      type: "spring",
+      stiffness: 100,
+      delay: 200,
+      duration: 500
+    }
+  }
+});
+
 export const SearchItem = styled.li`
   padding: 0 15px;
   margin: 5px 0;

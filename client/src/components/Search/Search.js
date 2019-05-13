@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
-import { Container, SearchList, SearchItem, AniAddBox } from "./styled";
+import { Container, AniSearchList, SearchItem, AniAddBox } from "./styled";
 import { InputField } from "../UI/InputField";
 import { Message } from "../UI/Message";
 import { CubeGrid } from "styled-spinkit";
@@ -8,9 +8,11 @@ import { CubeGrid } from "styled-spinkit";
 const Search = ({ searchOnChange, searchResults, addShowToList }) => {
   const [searchValue, setSearchValue] = useState("");
   const [typingTimeout, setTypingTimeout] = useState(null);
+  const [isTyping, setIsTyping] = useState(false);
   const onChange = e => {
     const value = e.target.value;
     setSearchValue(value);
+    setIsTyping(true);
 
     if (typingTimeout) {
       clearTimeout(typingTimeout);
@@ -18,12 +20,13 @@ const Search = ({ searchOnChange, searchResults, addShowToList }) => {
     setTypingTimeout(
       setTimeout(() => {
         searchOnChange(value);
+        setIsTyping(false);
       }, 500)
     );
   };
   return (
     <Container>
-      <Message>Search TV-Show</Message>
+      <Message bold>Search TV-Show</Message>
       <InputField
         placeholder="Type show name"
         type="text"
@@ -31,10 +34,10 @@ const Search = ({ searchOnChange, searchResults, addShowToList }) => {
         value={searchValue}
         onChange={onChange}
       />
-      {searchResults.length > 0 ? (
+      {searchResults.length > 0 && !isTyping ? (
         <>
           <Message>results...</Message>
-          <SearchList>
+          <AniSearchList initialPose="closed" pose="open">
             {searchResults.map(result => (
               <SearchItem key={result.id}>
                 <AniAddBox
@@ -45,11 +48,12 @@ const Search = ({ searchOnChange, searchResults, addShowToList }) => {
                 {result.name} <strong>({result.date})</strong>
               </SearchItem>
             ))}
-          </SearchList>
+          </AniSearchList>
         </>
       ) : (
         <Message>No results</Message>
       )}
+      {isTyping ? <CubeGrid color="#ec4d37" size={60} /> : null}
     </Container>
   );
 };

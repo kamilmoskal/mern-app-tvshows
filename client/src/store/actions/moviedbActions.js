@@ -8,8 +8,8 @@ export const getBg = () => dispatch => {
     .get(`https://api.themoviedb.org/3/tv/popular?api_key=${API_KEY}`)
     .then(res => {
       const size = window.innerWidth > 500 ? "original" : "w780";
-      const randomTv = Math.floor(Math.random() * 19) + 1;
-      const url = res.data.results[randomTv].backdrop_path;
+      //const randomTv = Math.floor(Math.random() * 19);
+      const url = res.data.results[0].backdrop_path;
       let bgUrl = null;
       if (url && url.length > 0) {
         bgUrl = `http://image.tmdb.org/t/p/${size}/${url}`;

@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Draggable } from "react-beautiful-dnd";
-import { Container, Image } from "./styled";
+import { AniContainer, Image } from "./styled";
 
 const Task = ({ task, index, columnId }) => {
   console.log("task");
@@ -13,7 +13,9 @@ const Task = ({ task, index, columnId }) => {
       //isDragDisabled={isDragDisabled}
     >
       {(provided, snapshot) => (
-        <Container
+        <AniContainer
+          initialPose="closed"
+          pose="open"
           {...provided.draggableProps}
           {...provided.dragHandleProps}
           ref={provided.innerRef}
@@ -34,7 +36,7 @@ const Task = ({ task, index, columnId }) => {
           <p>{task.name}</p>
           <p>({task.date})</p>
           <Image bg={task.poster} columnId={columnId === "inprogress"} />
-        </Container>
+        </AniContainer>
       )}
     </Draggable>
   );
