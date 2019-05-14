@@ -36,14 +36,12 @@ export const Container = styled.div`
 `;
 
 export const AniContainer = posed(Container)({
-  closed: { y: "200px", opacity: 0 },
+  closed: { y: "100px", opacity: 0 },
   open: {
     y: "0",
     opacity: 1,
     transition: {
-      type: "spring",
-      stiffness: 100,
-      delay: 200,
+      ease: "easeOut",
       duration: 500
     }
   }
@@ -64,10 +62,4 @@ export const Image = styled.div`
   background-position: center center;
   background-repeat: no-repeat;
   background-size: ${props => (props.columnId ? "70px" : "50px")};
-
-  ${({ theme }) => theme.media.tablet} {
-    width: ${props => (props.columnId ? "100px" : "50px")};
-    height: ${props => (props.columnId ? "100px" : "50px")};
-    background-size: ${props => (props.columnId ? "100px" : "50px")};
-  }
 `;

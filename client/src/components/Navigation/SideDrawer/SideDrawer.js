@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import {
   AnimatedNav,
   AnimatedNavList,
@@ -51,6 +52,11 @@ const SideDrawer = ({ user, navIsOpen }) => {
       </AnimatedNavList>
     </AnimatedNav>
   );
+};
+
+SideDrawer.propTypes = {
+  user: PropTypes.object,
+  navIsOpen: PropTypes.bool.isRequired
 };
 
 export default SideDrawer;

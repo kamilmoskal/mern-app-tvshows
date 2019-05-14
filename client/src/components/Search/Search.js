@@ -5,14 +5,18 @@ import { InputField } from "../UI/InputField";
 import { Message } from "../UI/Message";
 import { CubeGrid } from "styled-spinkit";
 
-const Search = ({ searchOnChange, searchResults, addShowToList }) => {
+const Search = ({
+  searchOnChange,
+  searchResults,
+  addShowToList,
+  isLoading
+}) => {
   const [searchValue, setSearchValue] = useState("");
   const [typingTimeout, setTypingTimeout] = useState(null);
-  const [isTyping, setIsTyping] = useState(false);
+
   const onChange = e => {
     const value = e.target.value;
     setSearchValue(value);
-    setIsTyping(true);
 
     if (typingTimeout) {
       clearTimeout(typingTimeout);
@@ -20,7 +24,6 @@ const Search = ({ searchOnChange, searchResults, addShowToList }) => {
     setTypingTimeout(
       setTimeout(() => {
         searchOnChange(value);
-        setIsTyping(false);
       }, 500)
     );
   };
@@ -34,7 +37,9 @@ const Search = ({ searchOnChange, searchResults, addShowToList }) => {
         value={searchValue}
         onChange={onChange}
       />
-      {searchResults.length > 0 && !isTyping ? (
+      {isLoading ? (
+        <CubeGrid color="#ec4d37" size={60} />
+      ) : searchResults.length > 0 ? (
         <>
           <Message>results...</Message>
           <AniSearchList initialPose="closed" pose="open">
@@ -53,7 +58,6 @@ const Search = ({ searchOnChange, searchResults, addShowToList }) => {
       ) : (
         <Message>No results</Message>
       )}
-      {isTyping ? <CubeGrid color="#ec4d37" size={60} /> : null}
     </Container>
   );
 };
@@ -61,7 +65,8 @@ const Search = ({ searchOnChange, searchResults, addShowToList }) => {
 Search.propTypes = {
   searchOnChange: PropTypes.func.isRequired,
   searchResults: PropTypes.array.isRequired,
-  addShowToList: PropTypes.func.isRequired
+  addShowToList: PropTypes.func.isRequired,
+  isLoading: PropTypes.bool.isRequired
 };
 
 export default Search;

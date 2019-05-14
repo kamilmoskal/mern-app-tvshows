@@ -17,7 +17,8 @@ const Dashboard = ({
   searchResults,
   addTVShowToList,
   tvShowList,
-  saveTVShowListToDB
+  saveTVShowListToDB,
+  isSearchLoading
 }) => {
   const searchOnChange = e => {
     searchTVShow(e);
@@ -28,6 +29,7 @@ const Dashboard = ({
   const saveListToDB = data => {
     saveTVShowListToDB(data);
   };
+  console.log("dashboard");
   return (
     <>
       <Container>
@@ -36,6 +38,7 @@ const Dashboard = ({
             searchOnChange={searchOnChange}
             searchResults={searchResults}
             addShowToList={addShowToList}
+            isLoading={isSearchLoading}
           />
           <DraggableList tvShowList={tvShowList} saveListToDB={saveListToDB} />
         </ListWrapper>
@@ -49,12 +52,14 @@ Dashboard.propTypes = {
   searchResults: PropTypes.array.isRequired,
   addTVShowToList: PropTypes.func.isRequired,
   tvShowList: PropTypes.object.isRequired,
-  saveTVShowListToDB: PropTypes.func.isRequired
+  saveTVShowListToDB: PropTypes.func.isRequired,
+  isSearchLoading: PropTypes.bool.isRequired
 };
 
 const mapStateToProps = state => ({
   searchResults: state.moviedb.searchResults,
-  tvShowList: transformedShowList(state)
+  tvShowList: transformedShowList(state),
+  isSearchLoading: state.moviedb.isLoading
 });
 
 export default connect(

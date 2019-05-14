@@ -2,7 +2,8 @@ import * as types from "../actions/types";
 
 const initState = {
   bgUrl: "",
-  searchResults: []
+  searchResults: [],
+  isLoading: false
 };
 
 export default (state = initState, action) => {
@@ -12,15 +13,22 @@ export default (state = initState, action) => {
         ...state,
         bgUrl: action.bgUrl
       };
+    case types.SEARCH_LOADING:
+      return {
+        ...state,
+        isLoading: true
+      };
     case types.SEARCH_SUCCESS:
       return {
         ...state,
-        searchResults: action.searchResults
+        searchResults: action.searchResults,
+        isLoading: false
       };
     case types.SEARCH_ERROR:
       return {
         ...state,
-        searchResults: []
+        searchResults: [],
+        isLoading: false
       };
     default:
       return state;

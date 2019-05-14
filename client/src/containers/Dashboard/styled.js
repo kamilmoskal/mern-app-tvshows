@@ -2,10 +2,9 @@ import styled from "styled-components";
 
 export const ListWrapper = styled.div`
   display: grid;
-  grid-gap: 10px;
-  margin: 10px 0;
 
   ${({ theme }) => theme.media.desktop} {
-    grid-template-columns: 30% 70%;
+    grid-gap: 2%;
+    grid-template-columns: 29% 69%;
   }
 `;

@@ -16,13 +16,11 @@ export const Title = styled.h3`
   color: white;
   background-color: ${({ theme }) => theme.colors.primary};
   padding: 10px;
+  margin: 0;
 `;
 export const TaskList = styled.div`
-  padding: 8px;
-  transition: all 0.2s ease;
   background-color: ${props =>
     props.isDraggingOver ? `${props.theme.colors.gray}` : "white"};
   overflow: scroll;
   height: 100%;
-  z-index: 1;
 `;

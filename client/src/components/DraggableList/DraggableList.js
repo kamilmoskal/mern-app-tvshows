@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import Column from "./Column/Column";
 import { DragDropContext } from "react-beautiful-dnd";
-import { Container } from "./styled";
+import { Container, Wrapper } from "./styled";
 import { AnimatedButton } from "../UI/Button";
 import { Message } from "../UI/Message";
 
@@ -79,10 +79,10 @@ const DraggableList = ({ tvShowList, saveListToDB }) => {
     //document.body.style.transition = "background-color 0.2s ease";
   };
   const onDragUpdate = update => {
-    const { destination } = update;
-    const opacity = destination
-      ? destination.index / Object.keys(tasks).length
-      : 0;
+    // const { destination } = update;
+    // const opacity = destination
+    //   ? destination.index / Object.keys(tasks).length
+    //   : 0;
     // document.body.style.backgroundColor = `rgba(153,141,217, ${opacity})`;
   };
   console.log("draggablelist");
@@ -104,10 +104,10 @@ const DraggableList = ({ tvShowList, saveListToDB }) => {
                 );
               })
             : null}
-          <div>
+          <Wrapper>
             <Message small>
-              *After each time you modified or added new items to list, you
-              should save changes or you will lost them
+              *After each time you ended modifing or added new items to list,
+              you should save changes or you will lost them
             </Message>
             <AnimatedButton
               margin
@@ -115,7 +115,7 @@ const DraggableList = ({ tvShowList, saveListToDB }) => {
             >
               Save changes
             </AnimatedButton>
-          </div>
+          </Wrapper>
         </Container>
       </DragDropContext>
     </>

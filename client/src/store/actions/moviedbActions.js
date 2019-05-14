@@ -1,20 +1,14 @@
 import * as types from "./types";
 import axios from "axios";
 
-const API_KEY = "4bba9cc0bb6eb5b67b64c5a5a057e2fc";
-
 export const getBg = () => dispatch => {
   axios
-    .get(`https://api.themoviedb.org/3/tv/popular?api_key=${API_KEY}`)
+    .get("/api/moviedb/bg")
     .then(res => {
       const size = window.innerWidth > 500 ? "original" : "w780";
-      //const randomTv = Math.floor(Math.random() * 19);
-      const url = res.data.results[0].backdrop_path;
-      let bgUrl = null;
-      if (url && url.length > 0) {
-        bgUrl = `http://image.tmdb.org/t/p/${size}/${url}`;
-      } else {
-        bgUrl = `http://image.tmdb.org/t/p/${size}/qsD5OHqW7DSnaQ2afwz8Ptht1Xb.jpg`;
+      let bgUrl = "";
+      if (res.data && res.data.length > 0) {
+        bgUrl = `http://image.tmdb.org/t/p/${size}/${res.data}`;
       }
       dispatch({ type: types.GETBG_SUCCESS, bgUrl });
     })
@@ -22,31 +16,19 @@ export const getBg = () => dispatch => {
 };
 
 export const searchTVShow = query => dispatch => {
+  dispatch({ type: types.SEARCH_LOADING });
   axios
-    .create({
+    /* .create({
       transformRequest: [
         (data, headers) => {
           delete headers.common["x-auth-token"];
           return data;
         }
       ]
-    })
-    .get(
-      `https://api.themoviedb.org/3/search/tv?api_key=${API_KEY}&language=en-US&query=${query}&page=1`
+    }) */
+    .get(`/api/moviedb/search/${query}`)
+    .then(res =>
+      dispatch({ type: types.SEARCH_SUCCESS, searchResults: res.data })
     )
-    .then(res => {
-      const searchResults = res.data.results.slice(0, 4).map(result => ({
-        id: result.id,
-        name: result.name,
-        date: result.first_air_date.substring(0, 4),
-        overview: result.overview,
-        poster:
-          result.poster_path !== null
-            ? `http://image.tmdb.org/t/p/w92/${result.poster_path}`
-            : "http://via.placeholder.com/100",
-        vote: result.vote_average.toFixed(1)
-      }));
-      dispatch({ type: types.SEARCH_SUCCESS, searchResults });
-    })
     .catch(err => dispatch({ type: types.SEARCH_ERROR }));
 };

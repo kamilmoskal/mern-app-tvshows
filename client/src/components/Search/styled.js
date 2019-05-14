@@ -7,6 +7,7 @@ export const Container = styled.div`
   min-height: 150px;
   display: flex;
   flex-direction: column;
+  background-color: white;
 `;
 
 export const SearchList = styled.ul`
