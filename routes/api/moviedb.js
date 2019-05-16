@@ -26,17 +26,16 @@ router.get("/bg", (req, res) => {
   });
 });
 
-// @route   GET api/moviedb/search
-// @desc    get search results depending on param
+// @route   POST api/moviedb/search
+// @desc    get search results depending on POST query data
 // @access  Public
-router.get("/search/:query", (req, res) => {
+router.post("/search", (req, res) => {
   const options = {
     uri: `https://api.themoviedb.org/3/search/tv?api_key=${config.get(
       "tmdbKey"
-    )}&language=en-US&query=${req.params.query}&page=1`,
+    )}&language=en-US&page=1&query=${req.body.query}`,
     method: "GET"
   };
-
   request(options, (error, response, body) => {
     if (error) {
       return res.status(500).json({ msg: "Server Error" });
@@ -44,7 +43,6 @@ router.get("/search/:query", (req, res) => {
     if (response.statusCode !== 200) {
       return res.status(404).json({ msg: "No tv-show found" });
     }
-
     return res.json(
       JSON.parse(body)
         .results.slice(0, 4)

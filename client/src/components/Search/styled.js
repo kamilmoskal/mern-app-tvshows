@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { AddBox } from "styled-icons/material/AddBox";
 import posed from "react-pose";
 
 export const Container = styled.div`
@@ -8,6 +7,7 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
   background-color: white;
+  margin-bottom: 15px;
 `;
 
 export const SearchList = styled.ul`
@@ -34,9 +34,13 @@ export const SearchItem = styled.li`
   font-size: 0.9rem;
 `;
 
-export const AddBoxStyled = styled(AddBox)`
+export const AddBoxStyled = styled.div`
   color: ${({ theme }) => theme.colors.primary};
   cursor: pointer;
+  display: inline-block;
+  margin-right: 5px;
+  height: 30px;
+  width: 30px;
   &:hover {
     color: ${({ theme }) => theme.colors.primaryLight};
   }

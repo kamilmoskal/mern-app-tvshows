@@ -1,0 +1,16 @@
+[33m8cb66da[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m, [m[1;31mheroku/master[m[33m)[m Prepare for deployment
+[33m6a737a4[m Handle TMDB API requests inside my api
+[33m0c670c5[m Changing style of list v2
+[33mce88a95[m Changing style of List
+[33m9479891[m Added timeout for search onChange input to dispatch action 500ms after user has stopped writting
+[33m483ad12[m Add tvShowList Reducer/Actions + Route to save ListData to DB
+[33m57d1cfb[m Fix Auth onunmount cler errors
+[33mb8e78ba[m Add Search input connecting with MovieDB and displaying result/ Add Prop.Types to rest components
+[33mf77a8de[m Setup react-beautiful-dnd
+[33m6386548[m Add Logout Action/Component
+[33me1b0971[m Add SideDrawer Navigation
+[33m242943c[m Add clear AuthErrors on SignIn/SignUp unmount
+[33m4ffea19[m Add reducer/actions Auth logic and Auth Screen
+[33mdcffd36[m Setup Redux
+[33m6905731[m Add container Auth/SingIn/SingUp
+[33m05f8a14[m Setup Express server with MongoDB, Register/Login routes + JWT

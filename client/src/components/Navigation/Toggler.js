@@ -1,8 +1,7 @@
-import { Menu } from "styled-icons/boxicons-regular/Menu";
 import styled from "styled-components";
 import posed from "react-pose";
 
-const Toggler = styled(Menu)`
+const Toggler = styled.div`
   position: fixed;
   top: 20px;
   left: 20px;
@@ -22,7 +21,6 @@ export default posed(Toggler)({
   pressable: true,
   init: {
     scale: 1,
-    rotate: "0",
     boxShadow: "0px 0px 0px rgba(0,0,0,0)"
   },
   hover: {

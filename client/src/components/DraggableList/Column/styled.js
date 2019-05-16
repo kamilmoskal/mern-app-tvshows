@@ -19,6 +19,7 @@ export const Title = styled.h3`
   margin: 0;
 `;
 export const TaskList = styled.div`
+  transition: all 0.5s ease;
   background-color: ${props =>
     props.isDraggingOver ? `${props.theme.colors.gray}` : "white"};
   overflow: scroll;

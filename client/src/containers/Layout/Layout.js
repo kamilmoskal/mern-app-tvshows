@@ -7,6 +7,7 @@ import { theme } from "../../utills/theme";
 import SideDrawer from "../../components/Navigation/SideDrawer/SideDrawer";
 import AnimatedToggler from "../../components/Navigation/Toggler";
 import { getBg } from "../../store/actions/moviedbActions";
+import { Menu } from "styled-icons/boxicons-regular/Menu";
 
 const Layout = ({ children, isAuth, user, bgUrl, dispatch }) => {
   const [navIsOpen, setNavIsOpen] = useState(false);
@@ -21,7 +22,9 @@ const Layout = ({ children, isAuth, user, bgUrl, dispatch }) => {
           <>
             <AnimatedToggler
               onClick={() => setNavIsOpen(prevNavIsOpen => !prevNavIsOpen)}
-            />
+            >
+              <Menu />
+            </AnimatedToggler>
             <SideDrawer user={user} navIsOpen={navIsOpen} />
           </>
         ) : null}

@@ -12,11 +12,17 @@ export const getBg = () => dispatch => {
       }
       dispatch({ type: types.GETBG_SUCCESS, bgUrl });
     })
-    .catch(err => dispatch({ type: types.GETBG_ERROR }));
+    .catch(err => {
+      console.log(err.response);
+      dispatch({ type: types.GETBG_ERROR });
+    });
 };
 
 export const searchTVShow = query => dispatch => {
   dispatch({ type: types.SEARCH_LOADING });
+  const searchValue = {
+    query
+  };
   axios
     /* .create({
       transformRequest: [
@@ -26,9 +32,12 @@ export const searchTVShow = query => dispatch => {
         }
       ]
     }) */
-    .get(`/api/moviedb/search/${query}`)
+    .post(`/api/moviedb/search`, searchValue)
     .then(res =>
       dispatch({ type: types.SEARCH_SUCCESS, searchResults: res.data })
     )
-    .catch(err => dispatch({ type: types.SEARCH_ERROR }));
+    .catch(err => {
+      console.log(err.response);
+      dispatch({ type: types.SEARCH_ERROR });
+    });
 };

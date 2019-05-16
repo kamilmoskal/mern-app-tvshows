@@ -4,6 +4,7 @@ import { Container, AniSearchList, SearchItem, AniAddBox } from "./styled";
 import { InputField } from "../UI/InputField";
 import { Message } from "../UI/Message";
 import { CubeGrid } from "styled-spinkit";
+import { AddBox } from "styled-icons/material/AddBox";
 
 const Search = ({
   searchOnChange,
@@ -45,11 +46,9 @@ const Search = ({
           <AniSearchList initialPose="closed" pose="open">
             {searchResults.map(result => (
               <SearchItem key={result.id}>
-                <AniAddBox
-                  size={30}
-                  title="Add to profile"
-                  onClick={() => addShowToList(result)}
-                />{" "}
+                <AniAddBox onClick={() => addShowToList(result)}>
+                  <AddBox title="Add to profile" />
+                </AniAddBox>
                 {result.name} <strong>({result.date})</strong>
               </SearchItem>
             ))}
