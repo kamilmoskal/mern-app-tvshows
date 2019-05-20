@@ -24,12 +24,10 @@ export const saveTVShowListToDB = data => dispatch => {
     watched: []
   };
 
-  for (let key in data.tasks) {
-    tvShowData.shows.push(data.tasks[key]);
-  }
-  for (let key in data.columns) {
-    tvShowData[data.columns[key].id] = [...data.columns[key].taskIds];
-  }
+  tvShowData.shows = [...Object.values(data.tasks)];
+  Object.keys(data.columns).forEach(
+    key => (tvShowData[data.columns[key].id] = [...data.columns[key].taskIds])
+  );
 
   axios
     .put("/api/users/tv-shows/update", tvShowData)
